@@ -1,0 +1,12 @@
+{
+  "name": "com.900lbs.unitytodmx",
+  "version": "1.0.0",
+  "displayName": "Unity to Dmx",
+  "description": "A framework for Unity to interface with DMX devices.",
+  "unity": "2019.3",
+  "author": {
+    "name": "Daniel Colina",
+    "email": "dcolina@900lbs.com"
+  },
+  "hideInEditor": false
+}

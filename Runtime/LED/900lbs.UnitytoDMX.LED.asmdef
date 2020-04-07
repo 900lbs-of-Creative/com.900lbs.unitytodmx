@@ -1,0 +1,15 @@
+{
+    "name": "900lbs.UnitytoDMX.LED",
+    "references": [
+        "GUID:2d12841aef09c65428904e5e7f78bc3d"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
