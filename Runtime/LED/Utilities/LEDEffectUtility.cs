@@ -9,48 +9,45 @@ namespace NineHundredLbs.UnitytoDMX.LED.Effects
         public const int LEDByteCount = 4;
 
         /// <summary>
-        /// Given a byte array <paramref name="bytes"/>, update all bytes to store the given <paramref name="color"/>
-        /// with the given <paramref name="intensity"/>.
+        /// Given a byte array <paramref name="bytes"/>, update all bytes to store the given <paramref name="color"/>.
         /// </summary>
         /// <param name="color">The desired color.</param>
-        /// <param name="intensity">The intensity (0-1) of the given color.</param>
         /// <param name="bytes">The byte array to write to.</param>
-        public static void WriteColorToBytes(Color32 color, float intensity, byte[] bytes)
+        public static void WriteColorToBytes(Color32 color, byte[] bytes)
         {
-            for (int i = 0; i < bytes.Length - 1; i++)
+            for (int i = 0; i < bytes.Length; i++)
             {
                 switch (i % LEDByteCount)
                 {
                     // RED
                     case 0:
-                        bytes[i] = (byte)(color.r * intensity);
+                        bytes[i] = color.r;
                         break;
 
                     // GREEN
                     case 1:
-                        bytes[i] = (byte)(color.g * intensity);
+                        bytes[i] = color.g;
                         break;
 
                     // BLUE
                     case 2:
-                        bytes[i] = (byte)(color.b * intensity);
+                        bytes[i] = color.b;
                         break;
 
                     // INTENSITY
-                    case 4:
-                        bytes[i] = (byte)(color.a * intensity);
+                    case 3:
+                        bytes[i] = color.a;
                         break;
                 }
             }
         }
 
         /// <summary>
-        /// Given an array segment <paramref name="arraySegment"/>, update all bytes to store the given <paramref name="color"/> with the given <paramref name="intensity"/>.
+        /// Given an array segment <paramref name="arraySegment"/>, update all bytes to store the given <paramref name="color"/>.
         /// </summary>
         /// <param name="color">The desired color.</param>
-        /// <param name="intensity">The intensity (0-1) of the given color.</param>
         /// <param name="arraySegment">The array segment to write to.</param>
-        public static void WriteColorToBytes(Color32 color, float intensity, ArraySegment<byte> arraySegment)
+        public static void WriteColorToBytes(Color32 color, ArraySegment<byte> arraySegment)
         {
             for (int i = arraySegment.Offset; i < arraySegment.Offset + arraySegment.Count; i++)
             {
@@ -58,22 +55,22 @@ namespace NineHundredLbs.UnitytoDMX.LED.Effects
                 {
                     // RED
                     case 0:
-                        arraySegment.Array[i] = (byte)(color.r * intensity);
+                        arraySegment.Array[i] = color.r;
                         break;
 
                     // GREEN
                     case 1:
-                        arraySegment.Array[i] = (byte)(color.g * intensity);
+                        arraySegment.Array[i] = color.g;
                         break;
 
                     // BLUE
                     case 2:
-                        arraySegment.Array[i] = (byte)(color.b * intensity);
+                        arraySegment.Array[i] = color.b;
                         break;
 
-                    // INTENSITY
-                    case 4:
-                        arraySegment.Array[i] = (byte)(color.a * intensity);
+                    // ALPHA
+                    case 3:
+                        arraySegment.Array[i] = color.a;
                         break;
                 }
             }
@@ -91,14 +88,13 @@ namespace NineHundredLbs.UnitytoDMX.LED.Effects
             for (int i = 0; i < bytes.Length; i++)
             {
                 // Create a color from 4 bits of byte data
-                Color32 color = new Color32();
-
-                color.r = bytes[i++];
-                color.g = bytes[i++];
-                color.b = bytes[i++];
-
-                // The LED's don't actually have an alpha channel, its an HDR channel
-                color.a = 255;
+                Color32 color = new Color32
+                {
+                    r = bytes[i++],
+                    g = bytes[i++],
+                    b = bytes[i++],
+                    a = bytes[i]
+                };
                 colors.Add(color);
             }
             return colors;
@@ -116,14 +112,13 @@ namespace NineHundredLbs.UnitytoDMX.LED.Effects
             for (int i = arraySegment.Offset; i < arraySegment.Offset + arraySegment.Count; i++)
             {
                 // Create a color from 4 bits of byte data
-                Color32 color = new Color32();
-
-                color.r = arraySegment.Array[i++];
-                color.g = arraySegment.Array[i++];
-                color.b = arraySegment.Array[i++];
-
-                // The LED's don't actually have an alpha channel, its an HDR channel
-                color.a = 255;
+                Color32 color = new Color32
+                {
+                    r = arraySegment.Array[i++],
+                    g = arraySegment.Array[i++],
+                    b = arraySegment.Array[i++],
+                    a = arraySegment.Array[i]
+                };
                 colors.Add(color);
             }
             return colors;

@@ -29,10 +29,7 @@ namespace NineHundredLbs.UnitytoDMX.LED.Effects
                 for (int i = 0; i < dmxData.Length - 1; i++)
                 {
                     if (i % 4 == 0)
-                    {
-                        LEDEffectUtility.WriteColorToBytes(glitchColors.Evaluate(UnityEngine.Random.value), UnityEngine.Random.value,
-                            new ArraySegment<byte>(dmxData, i, LEDEffectUtility.LEDByteCount));
-                    }
+                        LEDEffectUtility.WriteColorToBytes(glitchColors.Evaluate(UnityEngine.Random.value), new ArraySegment<byte>(dmxData, i, LEDEffectUtility.LEDByteCount));
                 }
                 yield return new WaitForSeconds(0.1f);
             }

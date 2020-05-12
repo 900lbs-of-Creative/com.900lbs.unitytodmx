@@ -17,21 +17,17 @@ namespace NineHundredLbs.UnitytoDMX.LED.Effects
         [Tooltip("Color of the trail over the length.")]
         [SerializeField] private Gradient colorOverLength = default;
 
-        [Tooltip("Intensity of the trail over the length.")]
-        [SerializeField] private AnimationCurve intensityOverLength = new AnimationCurve(new Keyframe(0.0f, 0.0f), new Keyframe(1.0f, 1.0f));
-
-        public void Init(float percentageLength, float speed, Gradient colorOverLength, AnimationCurve intensityOverLength)
+        public void Init(float percentageLength, float speed, Gradient colorOverLength)
         {
             this.percentageLength = percentageLength;
             this.speed = speed;
             this.colorOverLength = colorOverLength;
-            this.intensityOverLength = intensityOverLength;
         }
 
-        public static TrailLoopLEDEffect CreateInstance(float percentageLength, float speed, Gradient colorOverLength, AnimationCurve intensityOverLength)
+        public static TrailLoopLEDEffect CreateInstance(float percentageLength, float speed, Gradient colorOverLength)
         {
             var instance = CreateInstance<TrailLoopLEDEffect>();
-            instance.Init(percentageLength, speed, colorOverLength, intensityOverLength);
+            instance.Init(percentageLength, speed, colorOverLength);
             return instance;
         }
 
@@ -43,8 +39,7 @@ namespace NineHundredLbs.UnitytoDMX.LED.Effects
             
             while (true)
             {
-                // Color all lights black.
-                LEDEffectUtility.WriteColorToBytes(Color.black, 1.0f, dmxData);
+                LEDEffectUtility.WriteColorToBytes(Color.clear, dmxData);
 
                 ledTrailLength = GetLEDTrailLength();
 
@@ -56,19 +51,18 @@ namespace NineHundredLbs.UnitytoDMX.LED.Effects
                         if (!looped)
                             continue;
 
-                        targetLEDIndex = GetLEDCount() + targetLEDIndex;
+                        targetLEDIndex += GetLEDCount();
                     }
 
                     else if (targetLEDIndex >= GetLEDCount())
                     {
-                        targetLEDIndex = targetLEDIndex - GetLEDCount();
+                        targetLEDIndex -= GetLEDCount();
                         if (!looped)
                             looped = true;
                     }
 
                     Color color = colorOverLength.Evaluate(Mathf.Lerp(0, 1, Mathf.InverseLerp(currentLEDIndex - ledTrailLength, currentLEDIndex, i)));
-                    float intensity = intensityOverLength.Evaluate(Mathf.Lerp(0, 1, Mathf.InverseLerp(currentLEDIndex - ledTrailLength, currentLEDIndex, i)));
-                    LEDEffectUtility.WriteColorToBytes(color, intensity, new ArraySegment<byte>(dmxData, targetLEDIndex * LEDEffectUtility.LEDByteCount, LEDEffectUtility.LEDByteCount));
+                    LEDEffectUtility.WriteColorToBytes(color, new ArraySegment<byte>(dmxData, targetLEDIndex * LEDEffectUtility.LEDByteCount, LEDEffectUtility.LEDByteCount));
                 }
 
                 if (currentLEDIndex == GetLEDCount() + ledTrailLength)

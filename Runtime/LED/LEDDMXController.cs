@@ -129,7 +129,7 @@ namespace NineHundredLbs.UnitytoDMX.LED
             if (dispatchCoroutine != null)
                 StopCoroutine(dispatchCoroutine);
 
-            LEDEffectUtility.WriteColorToBytes(Color.black, 1.0f, GetDMXData());
+            LEDEffectUtility.WriteColorToBytes(Color.black, GetDMXData());
             SendCommand(GetDMXData());
         }
         #endregion
