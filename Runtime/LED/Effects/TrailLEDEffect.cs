@@ -20,6 +20,21 @@ namespace NineHundredLbs.UnitytoDMX.LED.Effects
         [Tooltip("Intensity of the trail over the length.")]
         [SerializeField] private AnimationCurve intensityOverLength = new AnimationCurve(new Keyframe(0.0f, 1.0f) , new Keyframe(1.0f, 0.0f));
 
+        public void Init(float percentageLength, float speed, Gradient colorOverLength, AnimationCurve intensityOverLength)
+        {
+            this.percentageLength = percentageLength;
+            this.speed = speed;
+            this.colorOverLength = colorOverLength;
+            this.intensityOverLength = intensityOverLength;
+        }
+
+        public static TrailLEDEffect CreateInstance(float percentageLength, float speed, Gradient colorOverLength, AnimationCurve intensityOverLength)
+        {
+            var instance = CreateInstance<TrailLEDEffect>();
+            instance.Init(percentageLength, speed, colorOverLength, intensityOverLength);
+            return instance;
+        }
+
         public override IEnumerator Execute(byte[] dmxData)
         {
             int currentLEDIndex = 0;

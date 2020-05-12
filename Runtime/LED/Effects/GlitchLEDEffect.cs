@@ -9,6 +9,18 @@ namespace NineHundredLbs.UnitytoDMX.LED.Effects
     {
         [Header("Settings and Preferences")]
         [SerializeField] private Gradient glitchColors = default;
+
+        public void Init(Gradient glitchColors)
+        {
+            this.glitchColors = glitchColors;
+        }
+
+        public static GlitchLEDEffect CreateInstance(Gradient glitchColors)
+        {
+            var instance = CreateInstance<GlitchLEDEffect>();
+            instance.Init(glitchColors);
+            return instance;
+        }
         
         public override IEnumerator Execute(byte[] dmxData)
         {

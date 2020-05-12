@@ -16,6 +16,20 @@ namespace NineHundredLbs.UnitytoDMX.LED.Effects
         [Tooltip("Intensity of the flash over the duration.")]
         [SerializeField] private AnimationCurve intensityOverDuration = new AnimationCurve(new Keyframe(0.0f, 0.0f), new Keyframe(0.5f, 1.0f), new Keyframe(1.0f, 0.0f));
 
+        public void Init(float duration, Gradient colorOverDuration, AnimationCurve intensityOverDuration)
+        {
+            this.duration = duration;
+            this.colorOverDuration = colorOverDuration;
+            this.intensityOverDuration = intensityOverDuration;
+        }
+
+        public static FlashLEDEffect CreateInstance(float duration, Gradient colorOverDuration, AnimationCurve intensityOverDuration)
+        {
+            var instance = CreateInstance<FlashLEDEffect>();
+            instance.Init(duration, colorOverDuration, intensityOverDuration);
+            return instance;
+        }
+
         public override IEnumerator Execute(byte[] dmxData)
         {
             float timer = 0.0f;

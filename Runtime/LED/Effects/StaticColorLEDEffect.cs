@@ -10,6 +10,19 @@ namespace NineHundredLbs.UnitytoDMX.LED.Effects
         [SerializeField] private Color32 color = Color.white;
         [SerializeField] private float intensity = 1.0f;
 
+        public void Init(Color32 color, float intensity)
+        {
+            this.color = color;
+            this.intensity = intensity;
+        }
+
+        public static StaticColorLEDEffect CreateInstance(Color32 color, float intensity)
+        {
+            var instance = CreateInstance<StaticColorLEDEffect>();
+            instance.Init(color, intensity);
+            return instance;
+        }
+
         public override IEnumerator Execute(byte[] dmxData)
         {
             while (true)
