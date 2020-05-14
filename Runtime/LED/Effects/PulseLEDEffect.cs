@@ -6,19 +6,33 @@ namespace NineHundredLbs.UnitytoDMX.LED.Effects
     [CreateAssetMenu(fileName = "New Pulse Effect", menuName = "DMX/LED/Create New Pulse Effect")]
     public class PulseLEDEffect : LEDEffect
     {
+        #region Serialized Private Variables
         [Header("Settings and Preferences")]
         [Tooltip("Duration of the pulse.")]
-        [SerializeField] private float duration = 0.5f;
+        [SerializeField] private float duration = 1.0f;
 
         [Tooltip("Color of the pulse over the duration.")]
         [SerializeField] private Gradient colorOverDuration = default;
+        #endregion
 
+        #region Public Methods
+        /// <summary>
+        /// Initialize with the given <paramref name="duration"/> and <paramref name="colorOverDuration"/>.
+        /// </summary>
+        /// <param name="duration">Duration of the pulse.</param>
+        /// <param name="colorOverDuration">Color of the pulse over the duration.</param>
         public void Init(float duration, Gradient colorOverDuration)
         {
             this.duration = duration;
             this.colorOverDuration = colorOverDuration;
         }
 
+        /// <summary>
+        /// Create and return a new instance with the given <paramref name="duration"/> and <paramref name="colorOverDuration"/>.
+        /// </summary>
+        /// <param name="duration">Duration of the pulse.</param>
+        /// <param name="colorOverDuration">Color of the pulse over the duration.</param>
+        /// <returns></returns>
         public static PulseLEDEffect CreateInstance(float duration, Gradient colorOverDuration)
         {
             var instance = CreateInstance<PulseLEDEffect>();
@@ -40,5 +54,6 @@ namespace NineHundredLbs.UnitytoDMX.LED.Effects
                 yield return null;
             }
         }
+        #endregion
     }
 }

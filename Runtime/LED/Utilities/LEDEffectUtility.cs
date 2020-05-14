@@ -6,8 +6,11 @@ namespace NineHundredLbs.UnitytoDMX.LED.Effects
 {
     public static class LEDEffectUtility
     {
+        #region Constants
         public const int LEDByteCount = 4;
+        #endregion
 
+        #region Public Methods
         /// <summary>
         /// Given a byte array <paramref name="bytes"/>, update all bytes to store the given <paramref name="color"/>.
         /// </summary>
@@ -123,5 +126,6 @@ namespace NineHundredLbs.UnitytoDMX.LED.Effects
             }
             return colors;
         }
+        #endregion
     }
 }

@@ -7,6 +7,7 @@ namespace NineHundredLbs.UnitytoDMX.LED.Effects
     [CreateAssetMenu(fileName = "New Trail Effect", menuName = "DMX/LED/Create New Trail Effect")]
     public class TrailLEDEffect : LEDEffect
     {
+        #region Serialized Private Variables
         [Header("Settings and Preferences")]
         [Tooltip("Percentage of the entire LED controller the trail takes up.")]
         [SerializeField, Range(0.01f, 0.99f)] private float percentageLength = 0.25f;
@@ -16,7 +17,15 @@ namespace NineHundredLbs.UnitytoDMX.LED.Effects
 
         [Tooltip("Color of the trail over the length.")]
         [SerializeField] private Gradient colorOverLength = default;
+        #endregion
 
+        #region Public Methods
+        /// <summary>
+        /// Initialize with the given <paramref name="percentageLength"/>, <paramref name="speed"/>, and <paramref name="colorOverLength"/>.
+        /// </summary>
+        /// <param name="percentageLength">Percentage of the entire LED controller the trail takes up.</param>
+        /// <param name="speed">Relative speed of the trail with 1 being 60 units per second.</param>
+        /// <param name="colorOverLength">Color of the trail over the length.</param>
         public void Init(float percentageLength, float speed, Gradient colorOverLength)
         {
             this.percentageLength = percentageLength;
@@ -24,6 +33,13 @@ namespace NineHundredLbs.UnitytoDMX.LED.Effects
             this.colorOverLength = colorOverLength;
         }
 
+        /// <summary>
+        /// Create and return a new instance with the given <paramref name="percentageLength"/>, <paramref name="speed"/>, and <paramref name="colorOverLength"/>.
+        /// </summary>
+        /// <param name="percentageLength">Percentage of the entire LED controller the trail takes up.</param>
+        /// <param name="speed">Relative speed of the trail with 1 being 60 units per second.</param>
+        /// <param name="colorOverLength">Color of the trail over the length.</param>
+        /// <returns></returns>
         public static TrailLEDEffect CreateInstance(float percentageLength, float speed, Gradient colorOverLength)
         {
             var instance = CreateInstance<TrailLEDEffect>();
@@ -67,5 +83,6 @@ namespace NineHundredLbs.UnitytoDMX.LED.Effects
                 return Mathf.FloorToInt(dmxData.Length / LEDEffectUtility.LEDByteCount);
             }
         }
+        #endregion
     }
 }

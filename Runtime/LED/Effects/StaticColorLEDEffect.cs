@@ -6,15 +6,28 @@ namespace NineHundredLbs.UnitytoDMX.LED.Effects
     [CreateAssetMenu(fileName = "New Static Color Effect", menuName = "DMX/LED/Create New Static Color Effect")]
     public class StaticColorLEDEffect : LEDEffect
     {
+        #region Serialized Private Variables
         [Header("Settings and Preferences")]
-        [SerializeField] private Color32 color = Color.white;
+        [Tooltip("Target color.")]
+        [SerializeField] private Color color = Color.white;
+        #endregion
 
-        public void Init(Color32 color)
+        #region Public Methods
+        /// <summary>
+        /// Initialize with the given <paramref name="color"/>.
+        /// </summary>
+        /// <param name="color">Target color.</param>
+        public void Init(Color color)
         {
             this.color = color;
         }
 
-        public static StaticColorLEDEffect CreateInstance(Color32 color)
+        /// <summary>
+        /// Create and return a new instance with the given <paramref name="color"/>.
+        /// </summary>
+        /// <param name="color">Target color.</param>
+        /// <returns></returns>
+        public static StaticColorLEDEffect CreateInstance(Color color)
         {
             var instance = CreateInstance<StaticColorLEDEffect>();
             instance.Init(color);
@@ -29,5 +42,6 @@ namespace NineHundredLbs.UnitytoDMX.LED.Effects
                 yield return null;
             }
         }
+        #endregion
     }
 }
