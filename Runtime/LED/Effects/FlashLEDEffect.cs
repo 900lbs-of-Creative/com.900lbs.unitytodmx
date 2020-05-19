@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace NineHundredLbs.UnitytoDMX.LED.Effects
+namespace NineHundredLbs.UnitytoDMX.LED
 {
     [CreateAssetMenu(fileName = "New Flash Effect", menuName = "DMX/LED/Create New Flash Effect")]
     public class FlashLEDEffect : LEDEffect
@@ -46,11 +46,11 @@ namespace NineHundredLbs.UnitytoDMX.LED.Effects
             while (timer <= duration)
             {
                 float normalizedTime = timer / duration;
-                LEDEffectUtility.WriteColorToBytes(colorOverDuration.Evaluate(normalizedTime), dmxData);
+                LEDEffectUtility.WriteColorToBytes(dmxData, colorOverDuration.Evaluate(normalizedTime));
                 timer += Time.deltaTime;
                 yield return null;
             }
-            LEDEffectUtility.WriteColorToBytes(Color.clear, dmxData);
+            LEDEffectUtility.WriteColorToBytes(dmxData, Color.clear);
         }
         #endregion
     }

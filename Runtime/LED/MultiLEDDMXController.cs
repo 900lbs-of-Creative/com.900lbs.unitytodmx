@@ -3,8 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using NineHundredLbs.UnitytoDMX.LED.Effects;
-
 namespace NineHundredLbs.UnitytoDMX.LED
 {
     public class MultiLEDDMXController : MonoBehaviour
@@ -62,7 +60,7 @@ namespace NineHundredLbs.UnitytoDMX.LED
             if (dispatchCoroutine != null)
                 StopCoroutine(dispatchCoroutine);
 
-            LEDEffectUtility.WriteColorToBytes(Color.black, GetDMXData());
+            LEDEffectUtility.WriteColorToBytes(GetDMXData(), Color.clear);
             SendCommand(GetDMXData());
         }
         #endregion

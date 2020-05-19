@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.ComTypes;
 using UnityEngine;
+using UnityEngine.Assertions;
 
-namespace NineHundredLbs.UnitytoDMX.LED.Effects
+namespace NineHundredLbs.UnitytoDMX.LED
 {
     public static class LEDEffectUtility
     {
@@ -14,9 +16,9 @@ namespace NineHundredLbs.UnitytoDMX.LED.Effects
         /// <summary>
         /// Given a byte array <paramref name="bytes"/>, update all bytes to store the given <paramref name="color"/>.
         /// </summary>
-        /// <param name="color">The desired color.</param>
         /// <param name="bytes">The byte array to write to.</param>
-        public static void WriteColorToBytes(Color32 color, byte[] bytes)
+        /// <param name="color">The desired color.</param>
+        public static void WriteColorToBytes(byte[] bytes, Color32 color)
         {
             for (int i = 0; i < bytes.Length; i++)
             {
@@ -48,9 +50,9 @@ namespace NineHundredLbs.UnitytoDMX.LED.Effects
         /// <summary>
         /// Given an array segment <paramref name="arraySegment"/>, update all bytes to store the given <paramref name="color"/>.
         /// </summary>
-        /// <param name="color">The desired color.</param>
         /// <param name="arraySegment">The array segment to write to.</param>
-        public static void WriteColorToBytes(Color32 color, ArraySegment<byte> arraySegment)
+        /// <param name="color">The desired color.</param>
+        public static void WriteColorToBytes(ArraySegment<byte> arraySegment, Color32 color)
         {
             for (int i = arraySegment.Offset; i < arraySegment.Offset + arraySegment.Count; i++)
             {
@@ -80,51 +82,82 @@ namespace NineHundredLbs.UnitytoDMX.LED.Effects
         }
         
         /// <summary>
-        /// Given a byte array <paramref name="bytes"/>, convert to and return a list of 
-        /// <see cref="Color32"/>.
+        /// Given a byte array <paramref name="bytes"/>, convert to and populate <paramref name="colors"/> with
+        /// values.
         /// </summary>
         /// <param name="bytes">The byte array to unpack.</param>
+        /// <param name="colors">The list of colors to unpack into.</param>
         /// <returns></returns>
-        public static List<Color32> ConvertBytesToColors(byte[] bytes)
+        public static void TryConvertBytesToColors(byte[] bytes, ref List<Color32> colors)
         {
-            List<Color32> colors = new List<Color32>();
+            Assert.IsTrue(bytes.Length % LEDByteCount == 0);
             for (int i = 0; i < bytes.Length; i++)
             {
-                // Create a color from 4 bits of byte data
-                Color32 color = new Color32
+                colors[i / LEDByteCount] = new Color32
                 {
                     r = bytes[i++],
                     g = bytes[i++],
                     b = bytes[i++],
                     a = bytes[i]
                 };
-                colors.Add(color);
             }
-            return colors;
         }
 
         /// <summary>
-        /// Given an array segment <paramref name="arraySegment"/>, convert to and return a list of
-        /// <see cref="Color32"/>.
+        /// Given an array segment <paramref name="arraySegment"/>, convert to and populate <paramref name="colors"/> with
+        /// values.
         /// </summary>
         /// <param name="arraySegment">The array segment to unpack.</param>
+        /// <param name="colors">The list of colors ot unpack into.</param>
         /// <returns></returns>
-        public static List<Color32> ConvertBytesToColors(ArraySegment<byte> arraySegment)
+        public static bool TryConvertBytesToColors(ArraySegment<byte> arraySegment, ref List<Color32> colors)
         {
-            List<Color32> colors = new List<Color32>();
+            Assert.IsTrue(arraySegment.Count % LEDByteCount == 0);
             for (int i = arraySegment.Offset; i < arraySegment.Offset + arraySegment.Count; i++)
             {
-                // Create a color from 4 bits of byte data
-                Color32 color = new Color32
+                colors[(i - arraySegment.Offset) / LEDByteCount] = new Color32
                 {
                     r = arraySegment.Array[i++],
                     g = arraySegment.Array[i++],
                     b = arraySegment.Array[i++],
                     a = arraySegment.Array[i]
                 };
-                colors.Add(color);
             }
-            return colors;
+            return true;
+        }
+
+        /// <summary>
+        /// Given a byte array <paramref name="bytes"/>, convert to and return a <see cref="Color32"/>.
+        /// </summary>
+        /// <param name="bytes">The byte array to unpack.</param>
+        /// <returns></returns>
+        public static Color32 ConvertBytesToColor(byte[] bytes)
+        {
+            Assert.IsTrue(bytes.Length == 4);
+            return new Color32
+            {
+                r = bytes[0],
+                g = bytes[1],
+                b = bytes[2],
+                a = bytes[3]
+            };
+        }
+
+        /// <summary>
+        /// Given an array segment <paramref name="arraySegment"/>, convert to and return a <see cref="Color32"/>.
+        /// </summary>
+        /// <param name="arraySegment">The array segment to unpack.</param>
+        /// <returns></returns>
+        public static Color32 ConvertBytesToColor(ArraySegment<byte> arraySegment)
+        {
+            Assert.IsTrue(arraySegment.Count == LEDByteCount);
+            return new Color32
+            {
+                r = arraySegment.Array[arraySegment.Offset],
+                g = arraySegment.Array[arraySegment.Offset + 1],
+                b = arraySegment.Array[arraySegment.Offset + 2],
+                a = arraySegment.Array[arraySegment.Offset + 3]
+            };
         }
         #endregion
     }

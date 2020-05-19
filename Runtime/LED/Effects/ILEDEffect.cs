@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace NineHundredLbs.UnitytoDMX.LED.Effects
+namespace NineHundredLbs.UnitytoDMX.LED
 {
     #region Interfaces
     /// <summary>

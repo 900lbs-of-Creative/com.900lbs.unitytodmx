@@ -2,8 +2,6 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-using NineHundredLbs.UnitytoDMX.LED.Effects;
-
 namespace NineHundredLbs.UnitytoDMX.LED
 {
     [Serializable]
@@ -129,7 +127,7 @@ namespace NineHundredLbs.UnitytoDMX.LED
             if (dispatchCoroutine != null)
                 StopCoroutine(dispatchCoroutine);
 
-            LEDEffectUtility.WriteColorToBytes(Color.black, GetDMXData());
+            LEDEffectUtility.WriteColorToBytes(GetDMXData(), Color.clear);
             SendCommand(GetDMXData());
         }
         #endregion

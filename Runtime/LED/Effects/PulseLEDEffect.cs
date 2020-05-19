@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace NineHundredLbs.UnitytoDMX.LED.Effects
+namespace NineHundredLbs.UnitytoDMX.LED
 {
     [CreateAssetMenu(fileName = "New Pulse Effect", menuName = "DMX/LED/Create New Pulse Effect")]
     public class PulseLEDEffect : LEDEffect
@@ -49,7 +49,7 @@ namespace NineHundredLbs.UnitytoDMX.LED.Effects
                     timer = 0.0f;
 
                 float normalizedTime = timer / duration;
-                LEDEffectUtility.WriteColorToBytes(colorOverDuration.Evaluate(normalizedTime), dmxData);
+                LEDEffectUtility.WriteColorToBytes(dmxData, colorOverDuration.Evaluate(normalizedTime));
                 timer += Time.deltaTime;
                 yield return null;
             }

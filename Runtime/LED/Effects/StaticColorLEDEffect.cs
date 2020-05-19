@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace NineHundredLbs.UnitytoDMX.LED.Effects
+namespace NineHundredLbs.UnitytoDMX.LED
 {
     [CreateAssetMenu(fileName = "New Static Color Effect", menuName = "DMX/LED/Create New Static Color Effect")]
     public class StaticColorLEDEffect : LEDEffect
@@ -38,7 +38,7 @@ namespace NineHundredLbs.UnitytoDMX.LED.Effects
         {
             while (true)
             {
-                LEDEffectUtility.WriteColorToBytes(color, dmxData);
+                LEDEffectUtility.WriteColorToBytes(dmxData, color);
                 yield return null;
             }
         }
