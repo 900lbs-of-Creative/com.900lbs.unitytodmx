@@ -41,16 +41,16 @@ namespace NineHundredLbs.UnitytoDMX.LED
         #region Private Variables
         private Coroutine dispatchCoroutine;
         private Coroutine effectCoroutine;
-        private byte[] dmxBytes;
+        private byte[] dmxData;
         #endregion
 
         #region Public Methods
         public override byte[] GetDMXData()
         {
-            if (dmxBytes == null)
-                dmxBytes = new byte[ledCount * LEDEffectUtility.LEDByteCount];
+            if (dmxData == null)
+                dmxData = new byte[ledCount * LEDEffectUtils.LEDByteCount];
 
-            return dmxBytes;
+            return dmxData;
         }
 
         public override void SendCommand(byte[] dmxData)
@@ -66,7 +66,7 @@ namespace NineHundredLbs.UnitytoDMX.LED
 
                 for (int i = 0; i < dmxData.Length; i++)
                 {
-                    switch (i % LEDEffectUtility.LEDByteCount)
+                    switch (i % LEDEffectUtils.LEDByteCount)
                     {
                         case 0:
                             byte outer = dmxData[i];
@@ -99,7 +99,7 @@ namespace NineHundredLbs.UnitytoDMX.LED
 
                 for (int i = dmxData.Offset; i < dmxData.Offset + dmxData.Count; i++)
                 {
-                    switch (i % LEDEffectUtility.LEDByteCount)
+                    switch (i % LEDEffectUtils.LEDByteCount)
                     {
                         case 0:
                             byte outer = dmxData.Array[i];
@@ -127,7 +127,7 @@ namespace NineHundredLbs.UnitytoDMX.LED
             if (dispatchCoroutine != null)
                 StopCoroutine(dispatchCoroutine);
 
-            LEDEffectUtility.WriteColorToBytes(GetDMXData(), Color.clear);
+            LEDEffectUtils.WriteColorToBytes(GetDMXData(), Color.clear);
             SendCommand(GetDMXData());
         }
         #endregion

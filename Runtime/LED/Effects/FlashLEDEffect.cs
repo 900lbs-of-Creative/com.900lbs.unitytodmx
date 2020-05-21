@@ -46,11 +46,11 @@ namespace NineHundredLbs.UnitytoDMX.LED
             while (timer <= duration)
             {
                 float normalizedTime = timer / duration;
-                LEDEffectUtility.WriteColorToBytes(dmxData, colorOverDuration.Evaluate(normalizedTime));
+                LEDEffectUtils.WriteColorToBytes(dmxData, colorOverDuration.Evaluate(normalizedTime));
                 timer += Time.deltaTime;
                 yield return null;
             }
-            LEDEffectUtility.WriteColorToBytes(dmxData, Color.clear);
+            LEDEffectUtils.WriteColorToBytes(dmxData, Color.clear);
         }
         #endregion
     }

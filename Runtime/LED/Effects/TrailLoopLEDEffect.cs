@@ -56,7 +56,7 @@ namespace NineHundredLbs.UnitytoDMX.LED
             
             while (true)
             {
-                LEDEffectUtility.WriteColorToBytes(dmxData, Color.clear);
+                LEDEffectUtils.WriteColorToBytes(dmxData, Color.clear);
 
                 ledTrailLength = GetLEDTrailLength();
                 currentLEDIndex = (int)currentLEDValue;
@@ -81,7 +81,7 @@ namespace NineHundredLbs.UnitytoDMX.LED
                     }
 
                     Color color = colorOverLength.Evaluate(Mathf.Lerp(0, 1, Mathf.InverseLerp(currentLEDIndex - ledTrailLength, currentLEDIndex, i)));
-                    LEDEffectUtility.WriteColorToBytes(new ArraySegment<byte>(dmxData, targetLEDIndex * LEDEffectUtility.LEDByteCount, LEDEffectUtility.LEDByteCount), color);
+                    LEDEffectUtils.WriteColorToBytes(new ArraySegment<byte>(dmxData, targetLEDIndex * LEDEffectUtils.LEDByteCount, LEDEffectUtils.LEDByteCount), color);
                 }
 
                 if (currentLEDValue >= GetLEDCount() + ledTrailLength)
@@ -98,7 +98,7 @@ namespace NineHundredLbs.UnitytoDMX.LED
 
             int GetLEDCount()
             {
-                return Mathf.FloorToInt(dmxData.Length / LEDEffectUtility.LEDByteCount);
+                return Mathf.FloorToInt(dmxData.Length / LEDEffectUtils.LEDByteCount);
             }
         }
         #endregion

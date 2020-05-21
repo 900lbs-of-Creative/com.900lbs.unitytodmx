@@ -38,7 +38,7 @@ namespace NineHundredLbs.UnitytoDMX.LED
         {
             while (true)
             {
-                LEDEffectUtility.WriteColorToBytes(dmxData, color);
+                LEDEffectUtils.WriteColorToBytes(dmxData, color);
                 yield return null;
             }
         }

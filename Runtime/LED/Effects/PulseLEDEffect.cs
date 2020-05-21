@@ -49,7 +49,7 @@ namespace NineHundredLbs.UnitytoDMX.LED
                     timer = 0.0f;
 
                 float normalizedTime = timer / duration;
-                LEDEffectUtility.WriteColorToBytes(dmxData, colorOverDuration.Evaluate(normalizedTime));
+                LEDEffectUtils.WriteColorToBytes(dmxData, colorOverDuration.Evaluate(normalizedTime));
                 timer += Time.deltaTime;
                 yield return null;
             }

@@ -46,7 +46,7 @@ namespace NineHundredLbs.UnitytoDMX.LED
             int currentDataIndex = 0;
             foreach (var ledDMXController in ledDMXControllers)
             {
-                int dmxDataCount = ledDMXController.LEDCount * LEDEffectUtility.LEDByteCount;
+                int dmxDataCount = ledDMXController.LEDCount * LEDEffectUtils.LEDByteCount;
                 ledDMXController.SendCommand(new ArraySegment<byte>(dmxData, currentDataIndex, dmxDataCount));
                 currentDataIndex += dmxDataCount;
             }
@@ -60,7 +60,7 @@ namespace NineHundredLbs.UnitytoDMX.LED
             if (dispatchCoroutine != null)
                 StopCoroutine(dispatchCoroutine);
 
-            LEDEffectUtility.WriteColorToBytes(GetDMXData(), Color.clear);
+            LEDEffectUtils.WriteColorToBytes(GetDMXData(), Color.clear);
             SendCommand(GetDMXData());
         }
         #endregion

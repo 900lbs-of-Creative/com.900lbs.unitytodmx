@@ -54,11 +54,11 @@ namespace NineHundredLbs.UnitytoDMX.LED
                 for (int i = 0; i < dmxData.Length; i += 4)
                 {
                     int remappedIndex = Mathf.FloorToInt(Mathf.Lerp(0, samples.Length, Mathf.InverseLerp(0, dmxData.Length, i)));
-                    var currentColor = LEDEffectUtility.ConvertBytesToColor(new ArraySegment<byte>(dmxData, i, LEDEffectUtility.LEDByteCount));
+                    var currentColor = LEDEffectUtils.ConvertBytesToColor(new ArraySegment<byte>(dmxData, i, LEDEffectUtils.LEDByteCount));
                     var targetColor = colors.Evaluate(Mathf.Lerp(0, 1, Mathf.InverseLerp(0, 0.01f, samples[remappedIndex])));
 
-                    LEDEffectUtility.WriteColorToBytes(
-                        new ArraySegment<byte>(dmxData, i, LEDEffectUtility.LEDByteCount),
+                    LEDEffectUtils.WriteColorToBytes(
+                        new ArraySegment<byte>(dmxData, i, LEDEffectUtils.LEDByteCount),
                         Color.Lerp(currentColor, targetColor, MathUtils.GetDampenFactor(colorDampening, Time.deltaTime)));
                 }
                 yield return null;

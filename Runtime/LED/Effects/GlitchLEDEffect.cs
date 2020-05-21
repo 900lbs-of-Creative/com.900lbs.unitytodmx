@@ -75,7 +75,7 @@ namespace NineHundredLbs.UnitytoDMX.LED
                         if (1 - Random.value > deviation)
                             continue;
 
-                        LEDEffectUtility.WriteColorToBytes(new ArraySegment<byte>(dmxData, i, LEDEffectUtility.LEDByteCount), colors.Evaluate(Random.value) * intensity.Evaluate(Random.value));
+                        LEDEffectUtils.WriteColorToBytes(new ArraySegment<byte>(dmxData, i, LEDEffectUtils.LEDByteCount), colors.Evaluate(Random.value) * intensity.Evaluate(Random.value));
                     }
 
                     for (int i = 0; i < 60 / speed; i++)
@@ -92,7 +92,7 @@ namespace NineHundredLbs.UnitytoDMX.LED
                         if (1 - Random.value > deviation)
                             continue;
 
-                        LEDEffectUtility.WriteColorToBytes(new ArraySegment<byte>(dmxData, i, LEDEffectUtility.LEDByteCount), colors.Evaluate(Random.value) * intensity.Evaluate(Random.value));
+                        LEDEffectUtils.WriteColorToBytes(new ArraySegment<byte>(dmxData, i, LEDEffectUtils.LEDByteCount), colors.Evaluate(Random.value) * intensity.Evaluate(Random.value));
                     }
 
                     for (int i = 0; i < 60 / speed; i++)
@@ -101,7 +101,7 @@ namespace NineHundredLbs.UnitytoDMX.LED
                         yield return null;
                     }
                 }
-                LEDEffectUtility.WriteColorToBytes(dmxData, Color.clear);
+                LEDEffectUtils.WriteColorToBytes(dmxData, Color.clear);
             }
         }
         #endregion

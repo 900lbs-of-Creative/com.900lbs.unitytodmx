@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Runtime.InteropServices.ComTypes;
 using UnityEngine;
 using UnityEngine.Assertions;
 
 namespace NineHundredLbs.UnitytoDMX.LED
 {
-    public static class LEDEffectUtility
+    public static class LEDEffectUtils
     {
         #region Constants
         public const int LEDByteCount = 4;
@@ -86,9 +84,9 @@ namespace NineHundredLbs.UnitytoDMX.LED
         /// values.
         /// </summary>
         /// <param name="bytes">The byte array to unpack.</param>
-        /// <param name="colors">The list of colors to unpack into.</param>
+        /// <param name="colors">The array of colors to unpack into.</param>
         /// <returns></returns>
-        public static void TryConvertBytesToColors(byte[] bytes, ref List<Color32> colors)
+        public static void TryConvertBytesToColors(byte[] bytes, ref Color32[] colors)
         {
             Assert.IsTrue(bytes.Length % LEDByteCount == 0);
             for (int i = 0; i < bytes.Length; i++)
@@ -108,9 +106,9 @@ namespace NineHundredLbs.UnitytoDMX.LED
         /// values.
         /// </summary>
         /// <param name="arraySegment">The array segment to unpack.</param>
-        /// <param name="colors">The list of colors ot unpack into.</param>
+        /// <param name="colors">The array of colors ot unpack into.</param>
         /// <returns></returns>
-        public static bool TryConvertBytesToColors(ArraySegment<byte> arraySegment, ref List<Color32> colors)
+        public static bool TryConvertBytesToColors(ArraySegment<byte> arraySegment, ref Color32[] colors)
         {
             Assert.IsTrue(arraySegment.Count % LEDByteCount == 0);
             for (int i = arraySegment.Offset; i < arraySegment.Offset + arraySegment.Count; i++)
