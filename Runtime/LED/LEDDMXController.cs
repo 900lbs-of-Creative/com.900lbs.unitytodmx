@@ -4,18 +4,7 @@ using UnityEngine;
 
 namespace NineHundredLbs.UnitytoDMX.LED
 {
-    [Serializable]
-    public class LEDDMXProperties : IDMXProperties
-    {
-        public LEDEffect ledEffect;
-
-        public LEDDMXProperties(LEDEffect ledEffect)
-        {
-            this.ledEffect = ledEffect;
-        }
-    }
-
-    public class LEDDMXController : ADMXController<LEDDMXProperties>
+    public class LEDDMXController : ADMXController<LEDEffect>
     {
         #region Constants
         /// <summary>
@@ -137,7 +126,7 @@ namespace NineHundredLbs.UnitytoDMX.LED
         {
             base.OnPropertiesSet();
             Clear();
-            effectCoroutine = StartCoroutine(Properties.ledEffect.Execute(GetDMXData()));
+            effectCoroutine = StartCoroutine(Properties.Execute(GetDMXData()));
             dispatchCoroutine = StartCoroutine(IE_Dispatch());
 
             IEnumerator IE_Dispatch()

@@ -7,15 +7,10 @@ namespace NineHundredLbs.UnitytoDMX
 {
     #region Interfaces
     /// <summary>
-    /// Interface for properties of DMX devices.
-    /// </summary>
-    public interface IDMXProperties { }
-
-    /// <summary>
     /// Interface for controllers of DMX devices with properties of type <typeparamref name="TDMXProperties"/>.
     /// </summary>
     /// <typeparam name="TDMXProperties">Type of data for this controller.</typeparam>
-    public interface IDMXController<TDMXProperties> where TDMXProperties : IDMXProperties
+    public interface IDMXController<TDMXProperties>
     {
         /// <summary>
         /// Properties of this DMX controller.
@@ -61,7 +56,7 @@ namespace NineHundredLbs.UnitytoDMX
     /// Base implementation for a controller of a DMX device with the given properties of type <typeparamref name="TDMXProperties"/>.
     /// </summary>
     /// <typeparam name="TDMXProperties">Type of properties for this controller.</typeparam>
-    public abstract class ADMXController<TDMXProperties> : MonoBehaviour, IDMXController<TDMXProperties> where TDMXProperties : IDMXProperties
+    public abstract class ADMXController<TDMXProperties> : MonoBehaviour, IDMXController<TDMXProperties>
     {
         #region Constants
         /// <summary>

@@ -19,7 +19,9 @@ namespace NineHundredLbs.UnitytoDMX.LED
         [SerializeField] private float colorDampening = -1;
         #endregion
 
+        #region Private Variables
         private float[] samples = new float[512];
+        #endregion
 
         #region Public Methods
         /// <summary>

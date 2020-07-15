@@ -8,11 +8,11 @@ namespace NineHundredLbs.UnitytoDMX.LED
     public class MultiLEDDMXController : MonoBehaviour
     {
         #region Properties
-        public LEDDMXProperties Properties => properties;
+        public LEDEffect Properties => properties;
         #endregion
 
         #region Serialized Private Variables
-        [SerializeField] private LEDDMXProperties properties = default;
+        [SerializeField] private LEDEffect properties = default;
         [SerializeField] private List<LEDDMXController> ledDMXControllers = default;
         #endregion
 
@@ -23,7 +23,7 @@ namespace NineHundredLbs.UnitytoDMX.LED
         #endregion
 
         #region Public Methods
-        public void SetProperties(LEDDMXProperties properties)
+        public void SetProperties(LEDEffect properties)
         {
             this.properties = properties;
             OnPropertiesSet();
@@ -69,7 +69,7 @@ namespace NineHundredLbs.UnitytoDMX.LED
         private void OnPropertiesSet()
         {
             Clear();
-            effectCoroutine = StartCoroutine(Properties.ledEffect.Execute(GetDMXData()));
+            effectCoroutine = StartCoroutine(Properties.Execute(GetDMXData()));
             dispatchCoroutine = StartCoroutine(IE_Dispatch());
 
             IEnumerator IE_Dispatch()

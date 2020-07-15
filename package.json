@@ -1,12 +1,19 @@
 {
   "name": "com.900lbs.unitytodmx",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "displayName": "Unity to DMX",
-  "description": "A framework for Unity to interface with DMX devices.",
+  "description": "A toolset to allow Unity to communicate with external DMX devices.",
   "unity": "2019.3",
   "author": {
     "name": "Daniel Colina",
     "email": "dcolina@900lbs.com"
   },
+  "samples": [
+    {
+      "displayName": "LED Samples",
+      "description": "Example scenes Unity to DMX's LED toolset in action.",
+      "path": "Samples~/LED Samples"
+    }
+  ],
   "hideInEditor": false
 }
