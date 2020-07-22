@@ -4,14 +4,10 @@ A toolset for Unity to interface with external DMX devices.
 
 ## Installation
 
-1. Open the `manifest.json` file in the `Packages` folder of your project and edit the `"dependencies"` section to look like this:
+1. Open the `manifest.json` file in the `Packages` folder of your project and add the following to the `"dependencies"` section:
 
     ```json
-    {
-        "dependencies": {
-            "com.900lbs.unitytodmx": "https://github.com/dcolina900lbs/com.900lbs.unitytodmx.git",
-        },
-    }
+    "com.900lbs.unitytodmx": "https://github.com/dcolina900lbs/com.900lbs.unitytodmx.git#upm"
     ```
 
 ## Getting Started
